@@ -1,0 +1,1495 @@
+<title>Curb Call</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ── TOKENS ── */
+:root {
+  --bg:        #080A08;
+  --surf1:     #121712;
+  --surf2:     #1B221B;
+  --surf3:     #242E24;
+  --green:     #39E819;
+  --green-dim: #2CB614;
+  --green-fog: rgba(57,232,25,0.08);
+  --green-mid: rgba(57,232,25,0.18);
+  --green-hi:  rgba(57,232,25,0.35);
+  --text:      #EFF7EF;
+  --text-2:    #A8BCA8;
+  --text-3:    #687868;
+  --border:    rgba(57,232,25,0.12);
+  --border-2:  rgba(255,255,255,0.06);
+  --display:   'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --body:      'DM Sans', system-ui, sans-serif;
+  --glow-sm:   0 0 16px rgba(57,232,25,0.22);
+  --glow-lg:   0 0 40px rgba(57,232,25,0.18), 0 0 80px rgba(57,232,25,0.08);
+}
+
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  padding-inline: 0;
+}
+
+/* ── NAV ── */
+.nav {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 200;
+  background: rgba(8,10,8,0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 62px;
+}
+.nav-brand { display:flex; flex-direction:column; line-height:1; gap:2px; }
+.nav-name {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 20px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--green);
+  text-shadow: var(--glow-sm);
+}
+.nav-sub {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 4px;
+  align-items: center;
+}
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 3px;
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--green); }
+.nav-phone {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  color: var(--bg) !important;
+  background: var(--green);
+  padding: 8px 18px !important;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+.nav-phone:hover { background: #4cf52b !important; color: var(--bg) !important; }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 90px 24px 80px;
+  min-height: 86vh;
+  display: flex;
+  align-items: center;
+}
+.hero-atmosphere {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 60% at 75% 45%, rgba(28,72,14,0.30) 0%, transparent 65%),
+    radial-gradient(ellipse 35% 40% at 10% 90%, rgba(18,50,10,0.20) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(57,232,25,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57,232,25,0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+}
+.hero-bg-word {
+  position: absolute;
+  right: -4%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(160px, 28vw, 380px);
+  text-transform: uppercase;
+  color: rgba(57,232,25,0.04);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1140px;
+  margin: 0 auto;
+  width: 100%;
+}
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 28px;
+}
+.hero-tag::before {
+  content: '';
+  width: 28px;
+  height: 2px;
+  background: var(--green);
+  box-shadow: var(--glow-sm);
+  display: block;
+}
+.hero h1 {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(68px, 13vw, 144px);
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-wrap: balance;
+  margin-bottom: 36px;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--green);
+  display: block;
+  text-shadow: var(--glow-lg);
+}
+.hero-body {
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--text-2);
+  max-width: 480px;
+  line-height: 1.75;
+  margin-bottom: 48px;
+}
+.hero-ctas {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.btn-green {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: var(--green);
+  color: var(--bg);
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 15px 30px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 0 28px rgba(57,232,25,0.22);
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+.btn-green:hover {
+  box-shadow: 0 0 48px rgba(57,232,25,0.38);
+  transform: translateY(-1px);
+}
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 14px 30px;
+  border-radius: 3px;
+  border: 1px solid var(--border-2);
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--green); color: var(--green); }
+.hero-stats {
+  display: flex;
+  gap: 52px;
+  margin-top: 72px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.stat-val {
+  display: block;
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 1;
+  color: var(--green);
+  font-variant-numeric: tabular-nums;
+}
+.stat-lbl {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-top: 5px;
+}
+
+/* ── SECTIONS ── */
+.wrap {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding-inline: 24px;
+}
+.section { padding-block: 100px; }
+.section.dark { background: var(--bg); }
+.section.lift { background: var(--surf1); }
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 14px;
+}
+.sec-h2 {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(40px, 7vw, 72px);
+  text-transform: uppercase;
+  line-height: 0.92;
+  color: var(--text);
+  margin-bottom: 18px;
+  text-wrap: balance;
+}
+.sec-body {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--text-2);
+  max-width: 480px;
+  line-height: 1.75;
+  margin-bottom: 60px;
+}
+
+/* ── HOW IT WORKS ── */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 2px;
+  margin-top: 16px;
+}
+.step {
+  background: var(--surf2);
+  padding: 48px 36px 44px;
+  position: relative;
+  overflow: hidden;
+}
+.step::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--surf3);
+}
+.step:first-child::after {
+  background: var(--green);
+  box-shadow: 0 0 16px rgba(57,232,25,0.45);
+}
+.step-word {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 72px;
+  line-height: 1;
+  color: var(--surf3);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: block;
+}
+.step:first-child .step-word { color: var(--green-mid); }
+.step h3 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.step p { font-size: 14px; color: var(--text-2); line-height: 1.75; }
+
+/* ── PRICING ── */
+.ptabs {
+  display: flex;
+  gap: 2px;
+  background: var(--surf2);
+  border-radius: 4px;
+  padding: 4px;
+  width: fit-content;
+  margin-bottom: 40px;
+}
+.ptab {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 9px 22px;
+  border-radius: 3px;
+  border: none;
+  background: transparent;
+  color: var(--text-3);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.ptab.on { background: var(--green); color: var(--bg); }
+.pgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(188px,1fr));
+  gap: 2px;
+}
+.pcard {
+  background: var(--surf2);
+  padding: 30px 22px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.15s, background 0.15s;
+  position: relative;
+}
+.pcard:hover { background: var(--surf3); }
+.pcard.on { border-color: var(--green); background: var(--surf3); }
+.pcard.on::before {
+  content: '✓';
+  position: absolute;
+  top: 10px; right: 14px;
+  color: var(--green);
+  font-weight: 700;
+  font-size: 14px;
+}
+.pcard-name {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.pcard-desc {
+  font-size: 12px;
+  color: var(--text-3);
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+.pcard-price {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 1;
+  color: var(--green);
+  font-variant-numeric: tabular-nums;
+}
+.pcard-price sup { font-size: 20px; vertical-align: top; margin-top: 6px; display:inline-block; }
+.pcard-price small { font-size: 14px; color: var(--text-3); font-weight: 600; }
+.price-guarantee {
+  margin-top: 36px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 20px 24px;
+  background: var(--green-fog);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.65;
+}
+.price-guarantee strong { color: var(--green); }
+.price-guarantee svg { flex-shrink: 0; margin-top: 1px; }
+
+/* ── SERVICES GRID ── */
+.svcs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(175px,1fr));
+  gap: 2px;
+  margin-top: 16px;
+}
+.svc {
+  background: var(--surf2);
+  padding: 22px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.svc-ico {
+  width: 38px;
+  height: 38px;
+  background: var(--green-fog);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+.svc-name { font-size: 13px; font-weight: 500; color: var(--text); line-height: 1.3; }
+
+/* ── QUOTE ── */
+.quote-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: start;
+}
+.upload-box {
+  position: relative;
+  border: 2px dashed var(--border);
+  border-radius: 6px;
+  padding: 52px 36px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  background: var(--surf2);
+  overflow: hidden;
+}
+.upload-box:hover, .upload-box.drag { border-color: var(--green); background: var(--green-fog); }
+.upload-box input[type=file] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+.upload-ico {
+  width: 60px; height: 60px;
+  background: var(--green-fog);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+}
+.upload-box h3 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 22px;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.upload-box p { font-size: 13px; color: var(--text-3); line-height: 1.6; }
+#previewWrap {
+  display: none;
+  margin-top: 18px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+#previewImg { width: 100%; max-height: 220px; object-fit: cover; display: block; }
+
+.qform { display: flex; flex-direction: column; gap: 14px; }
+.frow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.fl { display: flex; flex-direction: column; gap: 5px; }
+.fl label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.fl input, .fl select, .fl textarea {
+  background: var(--surf2);
+  border: 1px solid var(--surf3);
+  border-radius: 3px;
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 14px;
+  padding: 11px 14px;
+  outline: none;
+  transition: border-color 0.15s;
+  appearance: none;
+  width: 100%;
+}
+.fl input:focus, .fl select:focus, .fl textarea:focus { border-color: var(--green); }
+.fl textarea { min-height: 76px; resize: vertical; }
+.qmethods { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.qmethod {
+  border: 1px solid var(--surf3);
+  border-radius: 3px;
+  padding: 14px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: var(--surf2);
+}
+.qmethod:hover, .qmethod.on { border-color: var(--green); background: var(--green-fog); }
+.qm-ico { font-size: 22px; display: block; margin-bottom: 5px; }
+.qm-lbl {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+.full-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  background: var(--green);
+  color: var(--bg);
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 15px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 24px rgba(57,232,25,0.2);
+  transition: box-shadow 0.2s, transform 0.15s;
+  margin-top: 6px;
+}
+.full-btn:hover { box-shadow: 0 0 40px rgba(57,232,25,0.35); transform: translateY(-1px); }
+
+/* ── SCHEDULE ── */
+.sched-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.cal-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.cal-month {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.cal-btn {
+  width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  border: none;
+  background: var(--surf3);
+  color: var(--text-2);
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.15s;
+}
+.cal-btn:hover { background: var(--surf2); color: var(--green); }
+.dnames {
+  display: grid;
+  grid-template-columns: repeat(7,1fr);
+  gap: 3px;
+  margin-bottom: 6px;
+}
+.dname {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  padding: 6px 0;
+}
+.dcells {
+  display: grid;
+  grid-template-columns: repeat(7,1fr);
+  gap: 3px;
+}
+.dcell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  border-radius: 3px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  font-family: var(--body);
+  transition: background 0.15s, color 0.15s;
+  color: var(--text-2);
+}
+.dcell:hover:not([disabled]) { background: var(--surf3); color: var(--text); }
+.dcell.today { color: var(--green); font-weight: 700; }
+.dcell.picked { background: var(--green) !important; color: var(--bg) !important; font-weight: 700; }
+.dcell[disabled] { color: var(--surf3); cursor: default; }
+.slots-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 12px;
+}
+.slots-label span { color: var(--green); }
+.slots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.slot {
+  background: var(--surf2);
+  border: 1px solid var(--surf3);
+  border-radius: 3px;
+  padding: 13px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+  cursor: pointer;
+  border: none;
+  font-family: var(--body);
+  transition: all 0.15s;
+}
+.slot:hover { border: 1px solid var(--green); color: var(--text); }
+.slot.picked { background: var(--green); color: var(--bg); font-weight: 700; border: 1px solid var(--green); }
+.sched-confirm {
+  background: var(--surf2);
+  border: 1px solid var(--surf3);
+  border-radius: 4px;
+  padding: 24px;
+}
+.sched-confirm-lbl {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 14px;
+}
+
+/* ── TRUST CARDS ── */
+.trust-row {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 2px;
+  margin-top: 16px;
+}
+.trust-card {
+  background: var(--surf2);
+  padding: 44px 36px;
+}
+.trust-val {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 60px;
+  line-height: 1;
+  color: var(--green);
+  text-shadow: 0 0 20px rgba(57,232,25,0.28);
+  margin-bottom: 12px;
+  display: block;
+}
+.trust-desc {
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.7;
+}
+
+/* ── CTA BAND ── */
+.cta-band {
+  background: var(--green);
+  padding: 80px 24px;
+  text-align: center;
+}
+.cta-band h2 {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(40px, 9vw, 86px);
+  text-transform: uppercase;
+  line-height: 0.9;
+  color: var(--bg);
+  margin-bottom: 22px;
+}
+.cta-band p {
+  font-size: 17px;
+  color: rgba(0,0,0,0.55);
+  max-width: 400px;
+  margin: 0 auto 36px;
+}
+.btn-black {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg);
+  color: var(--green);
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, transform 0.15s;
+}
+.btn-black:hover { background: #0e120e; transform: translateY(-1px); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 64px 24px 40px;
+}
+.footer-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+.foot-name {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: var(--green);
+  text-shadow: var(--glow-sm);
+  line-height: 1;
+  margin-bottom: 3px;
+}
+.foot-sub {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 14px;
+}
+.foot-tagline { font-size: 13px; color: var(--text-3); line-height: 1.65; }
+.foot-col h4 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  margin-bottom: 14px;
+}
+.foot-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.foot-col a {
+  font-size: 13px;
+  color: var(--text-3);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.foot-col a:hover { color: var(--green); }
+.foot-bottom {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding-top: 28px;
+  border-top: 1px solid var(--surf2);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+/* ── MODALS ── */
+.modal-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.82);
+  backdrop-filter: blur(6px);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-bg[hidden] {
+  display: none !important;
+  padding: 24px;
+}
+.modal-box {
+  background: var(--surf1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 48px 40px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+}
+.modal-ico {
+  width: 68px; height: 68px;
+  background: var(--green-fog);
+  border: 2px solid var(--green);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 26px;
+}
+.modal-box h3 {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 28px;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.modal-box p { font-size: 14px; color: var(--text-2); line-height: 1.7; margin-bottom: 10px; }
+.modal-phone {
+  display: block;
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 28px;
+  color: var(--green);
+  letter-spacing: 0.04em;
+  margin: 14px 0 20px;
+  text-shadow: var(--glow-sm);
+}
+.modal-note { font-size: 12px !important; color: var(--text-3) !important; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) {
+  .steps { grid-template-columns: 1fr; }
+  .quote-split { grid-template-columns: 1fr; gap: 40px; }
+  .sched-split { grid-template-columns: 1fr; }
+  .trust-row { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .frow { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .hero-bg-word { right: -10%; }
+  .pgrid { grid-template-columns: 1fr 1fr; }
+  .footer-inner { grid-template-columns: 1fr; }
+  .qmethods { grid-template-columns: 1fr; }
+  .hero-stats { gap: 28px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+</style>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">
+    <span class="nav-name">Curb Call</span>
+    <span class="nav-sub">A Woods &amp; Wetlands Co.</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#quote">Get a Quote</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="tel:+13205550100" class="nav-phone">(320) 555-0100</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-atmosphere"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-bg-word">CURB</div>
+  <div class="hero-inner">
+    <p class="hero-tag">St. Cloud, MN Junk Removal</p>
+    <h1>Put It At<br>
+      <em>The Curb.</em>
+      We'll Do<br>The Rest.
+    </h1>
+    <p class="hero-body">Snap a photo, get a firm quote by text, schedule a pickup — you don't even have to be home. Serving Stearns &amp; Benton Counties.</p>
+    <div class="hero-ctas">
+      <a href="#quote" class="btn-green">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        Snap &amp; Get a Quote
+      </a>
+      <a href="#pricing" class="btn-ghost">View Pricing</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-val">$59</span>
+        <p class="stat-lbl">Starting price</p>
+      </div>
+      <div>
+        <span class="stat-val">24hr</span>
+        <p class="stat-lbl">Quote turnaround</p>
+      </div>
+      <div>
+        <span class="stat-val">Same Day</span>
+        <p class="stat-lbl">Pickup available</p>
+      </div>
+      <div>
+        <span class="stat-val">$0</span>
+        <p class="stat-lbl">Hidden fees</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section lift" id="how">
+  <div class="wrap">
+    <p class="eyebrow">The Process</p>
+    <h2 class="sec-h2">Three Steps.<br>Zero Hassle.</h2>
+    <p class="sec-body">You don't even need to be home. Set it at the curb and we handle everything from there.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="step-word">Snap</span>
+        <h3>Take a Photo</h3>
+        <p>Photograph your junk at the curb — or wherever it is. Upload it here or text it directly to our number. The more we see, the more accurate the quote.</p>
+      </div>
+      <div class="step">
+        <span class="step-word">Quote</span>
+        <h3>Get Your Price</h3>
+        <p>We'll text you back a firm price — usually within a few hours. The number we send is the number you pay. No add-ons, no fuel surcharges.</p>
+      </div>
+      <div class="step">
+        <span class="step-word">Gone</span>
+        <h3>We Pick It Up</h3>
+        <p>Choose your pickup window and we'll be there. Our crew loads and hauls everything — we recycle and donate what we can.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section dark" id="pricing">
+  <div class="wrap">
+    <p class="eyebrow">Transparent Pricing</p>
+    <h2 class="sec-h2">Pick Your<br>Load Size</h2>
+    <p class="sec-body">All prices are for curbside pickup. Need inside removal? Add $40 per room. Not sure? Send a photo and we'll tell you exactly what it'll cost.</p>
+
+    <div class="ptabs">
+      <button class="ptab on" onclick="swapPricing('items',this)">By Item</button>
+      <button class="ptab" onclick="swapPricing('sqft',this)">By Truck Space</button>
+    </div>
+
+    <div id="pg-items" class="pgrid">
+      <div class="pcard" onclick="pickCard(this)">
+        <div class="pcard-name">1 Item</div>
+        <div class="pcard-desc">Single piece — furniture, appliance, or large item</div>
+        <div class="pcard-price"><sup>$</sup>59<small>+</small></div>
+      </div>
+      <div class="pcard" onclick="pickCard(this)">
+        <div class="pcard-name">2 Items</div>
+        <div class="pcard-desc">Two pieces — couch + chair, washer + dryer</div>
+        <div class="pcard-price"><sup>$</sup>89<small>+</small></div>
+      </div>
+      <div class="pcard" onclick="pickCard(this)">
+        <div class="pcard-name">3 Items</div>
+        <div class="pcard-desc">Three distinct pieces or a small mixed pile</div>
+        <div class="pcard-price"><sup>$</sup>119<small>+</small></div>
+      </div>
+      <div class="pcard" onclick="pickCard(this)">
+        <div class="pcard-name">4–6 Items</div>
+        <div class="pcard-desc">Medium cleanout, mixed pile or several large items</div>
+        <div class="pcard-price"><sup>$</sup>169<small>+</small></div>
+      </div>
+      <div class="pcard" onclick="pickCard(this)">
+        <div class="pcard-name">7–10 Items</div>
+        <div class="pcard-desc">Large cleanout — garage, basement, shed haul-out</div>
+        <div class="pcard-price"><sup>$</sup>229<small>+</small></div>
+      </div>
+      <div class="pcard" onclick="pickCard(this)">
+        <div class="pcard-name">Full Load</div>
+        <div class="pcard-desc">Full truck — best value per item, maximum volume</div>
+        <div class="pcard-price"><sup>$</sup>449<small>+</small></div>
+      </div>
+    </div>
+
+    <div id="pg-sqft" class="pgrid" style="display:none">
+      <div class="pcard" onclick="pickCard(this)">
+        <div class="pcard-name">Mini</div>
+        <div class="pcard-desc">Up to 50 sq ft of truck space</div>
+        <div class="pcard-price"><sup>$</sup>89<small>+</small></div>
+      </div>
+      <div class="pcard" onclick="pickCard(this)">
+        <div class="pcard-name">¼ Truck</div>
+        <div class="pcard-desc">Up to 100 sq ft — single room cleanout</div>
+        <div class="pcard-price"><sup>$</sup>149<small>+</small></div>
+      </div>
+      <div class="pcard" onclick="pickCard(this)">
+        <div class="pcard-name">½ Truck</div>
+        <div class="pcard-desc">Up to 200 sq ft — garage or basement</div>
+        <div class="pcard-price"><sup>$</sup>249<small>+</small></div>
+      </div>
+      <div class="pcard" onclick="pickCard(this)">
+        <div class="pcard-name">¾ Truck</div>
+        <div class="pcard-desc">Up to 300 sq ft — large estate cleanout</div>
+        <div class="pcard-price"><sup>$</sup>349<small>+</small></div>
+      </div>
+      <div class="pcard" onclick="pickCard(this)">
+        <div class="pcard-name">Full Truck</div>
+        <div class="pcard-desc">400+ sq ft — max load, best value per cubic foot</div>
+        <div class="pcard-price"><sup>$</sup>449<small>+</small></div>
+      </div>
+    </div>
+
+    <div class="price-guarantee">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#39E819" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span><strong>Quoted price guarantee —</strong> The price we text you is the price you pay. Fuel, labor, and dump fees are always included. Not sure what tier you need? Send a photo and we'll size it for you.</span>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE HAUL -->
+<section class="section lift" id="services">
+  <div class="wrap">
+    <p class="eyebrow">What We Haul</p>
+    <h2 class="sec-h2">If It's At The Curb,<br>It's As Good As Gone.</h2>
+    <div class="svcs">
+      <div class="svc"><div class="svc-ico">🛋️</div><span class="svc-name">Furniture &amp; Sofas</span></div>
+      <div class="svc"><div class="svc-ico">🧺</div><span class="svc-name">Appliances</span></div>
+      <div class="svc"><div class="svc-ico">🛏️</div><span class="svc-name">Mattresses &amp; Box Springs</span></div>
+      <div class="svc"><div class="svc-ico">📺</div><span class="svc-name">TVs &amp; Electronics</span></div>
+      <div class="svc"><div class="svc-ico">🏗️</div><span class="svc-name">Construction Debris</span></div>
+      <div class="svc"><div class="svc-ico">🌿</div><span class="svc-name">Yard Waste &amp; Brush</span></div>
+      <div class="svc"><div class="svc-ico">🚲</div><span class="svc-name">Bikes &amp; Sporting Gear</span></div>
+      <div class="svc"><div class="svc-ico">📦</div><span class="svc-name">Moving Boxes &amp; Junk</span></div>
+      <div class="svc"><div class="svc-ico">🔧</div><span class="svc-name">Tools &amp; Equipment</span></div>
+      <div class="svc"><div class="svc-ico">🚗</div><span class="svc-name">Auto Parts &amp; Tires</span></div>
+      <div class="svc"><div class="svc-ico">🏠</div><span class="svc-name">Estate Cleanouts</span></div>
+      <div class="svc"><div class="svc-ico">♻️</div><span class="svc-name">Recyclables &amp; Scrap Metal</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- GET A QUOTE -->
+<section class="section dark" id="quote">
+  <div class="wrap">
+    <div class="quote-split">
+      <div>
+        <p class="eyebrow">Get a Quote</p>
+        <h2 class="sec-h2">Snap It.<br>Send It.<br>Done.</h2>
+        <p class="sec-body" style="margin-bottom:28px">Add a photo of what you need hauled. We'll text you a firm quote — usually within a few hours. No commitment until you say yes.</p>
+        <div class="upload-box" id="uploadBox">
+          <input type="file" accept="image/*" capture="environment" id="photoInput" onchange="handlePhoto(this)">
+          <div class="upload-ico">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#39E819" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          </div>
+          <h3>Add a Photo</h3>
+          <p>Tap to snap or choose from your camera roll.<br>We quote from photos and reply by text.</p>
+          <div id="previewWrap">
+            <img id="previewImg" src="" alt="Your junk photo">
+          </div>
+        </div>
+      </div>
+
+      <div class="qform">
+        <p class="eyebrow" style="margin-bottom:0">Your Info</p>
+        <div class="frow">
+          <div class="fl">
+            <label>First Name</label>
+            <input type="text" id="qFirst" placeholder="First">
+          </div>
+          <div class="fl">
+            <label>Last Name</label>
+            <input type="text" id="qLast" placeholder="Last">
+          </div>
+        </div>
+        <div class="fl">
+          <label>Cell Phone — we'll text your quote here</label>
+          <input type="tel" id="qPhone" placeholder="(320) 555-0000">
+        </div>
+        <div class="fl">
+          <label>Pickup Address</label>
+          <input type="text" id="qAddr" placeholder="123 Main St, St. Cloud, MN">
+        </div>
+        <div class="fl">
+          <label>Rough Load Size</label>
+          <select id="qLoad">
+            <option value="">Select an estimate…</option>
+            <option>1 item</option>
+            <option>2–3 items</option>
+            <option>4–6 items</option>
+            <option>7–10 items</option>
+            <option>Full load / not sure</option>
+          </select>
+        </div>
+        <div class="fl">
+          <label>Anything else? (optional)</label>
+          <textarea id="qNotes" placeholder="Heavy items, stairs, specific location notes…"></textarea>
+        </div>
+        <div class="fl">
+          <label>How should we send your quote?</label>
+          <div class="qmethods">
+            <div class="qmethod on" data-method="text" onclick="pickMethod(this)">
+              <span class="qm-ico">💬</span>
+              <span class="qm-lbl">Text Message</span>
+            </div>
+            <div class="qmethod" data-method="call" onclick="pickMethod(this)">
+              <span class="qm-ico">📞</span>
+              <span class="qm-lbl">Phone Call</span>
+            </div>
+          </div>
+        </div>
+        <button class="full-btn" onclick="sendQuote()">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Send Quote Request
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="section lift" id="schedule">
+  <div class="wrap">
+    <p class="eyebrow">Schedule a Pickup</p>
+    <h2 class="sec-h2">Pick Your<br>Window</h2>
+    <p class="sec-body">Choose a date and time window. Same-day slots available most days. We'll confirm by text.</p>
+    <div class="sched-split">
+      <div>
+        <div class="cal-hd">
+          <button class="cal-btn" onclick="navMonth(-1)">&#8592;</button>
+          <span class="cal-month" id="calMonthLabel">September 2026</span>
+          <button class="cal-btn" onclick="navMonth(1)">&#8594;</button>
+        </div>
+        <div class="dnames">
+          <div class="dname">Su</div><div class="dname">Mo</div><div class="dname">Tu</div>
+          <div class="dname">We</div><div class="dname">Th</div><div class="dname">Fr</div>
+          <div class="dname">Sa</div>
+        </div>
+        <div class="dcells" id="calCells"></div>
+      </div>
+
+      <div>
+        <p class="slots-label">Time windows — <span id="slotDateLabel">select a date above</span></p>
+        <div class="slots">
+          <button class="slot" onclick="pickSlot(this)">7 AM – 9 AM</button>
+          <button class="slot" onclick="pickSlot(this)">9 AM – 11 AM</button>
+          <button class="slot" onclick="pickSlot(this)">11 AM – 1 PM</button>
+          <button class="slot" onclick="pickSlot(this)">1 PM – 3 PM</button>
+          <button class="slot" onclick="pickSlot(this)">3 PM – 5 PM</button>
+          <button class="slot" onclick="pickSlot(this)">5 PM – 7 PM</button>
+        </div>
+        <div class="sched-confirm">
+          <p class="sched-confirm-lbl">Confirm your slot</p>
+          <div class="fl" style="margin-bottom:10px">
+            <label>Your Name</label>
+            <input type="text" id="sName" placeholder="Full name">
+          </div>
+          <div class="fl" style="margin-bottom:16px">
+            <label>Cell Phone</label>
+            <input type="tel" id="sPhone" placeholder="(320) 555-0000">
+          </div>
+          <button class="full-btn" onclick="confirmPickup()">Confirm Pickup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CURB CALL -->
+<section class="section dark">
+  <div class="wrap">
+    <p class="eyebrow">Why Curb Call</p>
+    <h2 class="sec-h2">Locally Owned.<br>Straight Up.</h2>
+    <div class="trust-row">
+      <div class="trust-card">
+        <span class="trust-val">$0</span>
+        <p class="trust-desc">Hidden fees. The price we quote covers fuel, dump fees, and labor. That number is what you pay — period.</p>
+      </div>
+      <div class="trust-card">
+        <span class="trust-val">24hr</span>
+        <p class="trust-desc">Maximum quote turnaround during business hours. Most quotes come back in 2–4 hours. Reply to accept, and you're on the schedule.</p>
+      </div>
+      <div class="trust-card">
+        <span class="trust-val">No Show</span>
+        <p class="trust-desc">No-presence required. Put your junk at the curb, tell us where, and we'll handle the rest — you don't even need to be home.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <h2>Got Junk?<br>Curb It.</h2>
+  <p>Stearns &amp; Benton Counties. Fast quotes, no hidden fees, same-day available.</p>
+  <a href="#quote" class="btn-black">Get a Free Quote &rarr;</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="foot-name">Curb Call</div>
+      <div class="foot-sub">A Woods &amp; Wetlands Co.</div>
+      <p class="foot-tagline">Serving St. Cloud and the surrounding Stearns and Benton County area. Fast, no-nonsense curbside junk removal with transparent pricing.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Furniture &amp; Sofas</a></li>
+        <li><a href="#services">Appliances</a></li>
+        <li><a href="#services">Estate Cleanouts</a></li>
+        <li><a href="#services">Construction Debris</a></li>
+        <li><a href="#services">Yard Waste</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#quote">Get a Quote</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="sms:+13205550100">Text for a Quote</a></li>
+        <li><a href="tel:+13205550100">(320) 555-0100</a></li>
+        <li><a href="#">St. Cloud, MN</a></li>
+        <li><a href="#">Mon–Sat · 7 AM–7 PM</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Curb Call Junk Removal &middot; A Woods &amp; Wetlands Co.</span>
+    <span>St. Cloud, MN &middot; (320) 555-0100</span>
+  </div>
+</footer>
+
+<!-- QUOTE SUCCESS MODAL -->
+<div class="modal-bg" id="quoteModal" hidden onclick="if(event.target===this)this.hidden=true">
+  <div class="modal-box">
+    <div class="modal-ico">✅</div>
+    <h3>Quote Request Sent!</h3>
+    <p>We've got your info. We'll text your quote to:</p>
+    <span class="modal-phone" id="modalPhoneDisplay">(320) 555-0000</span>
+    <p>Your photo will open in your text messages — send it along with your request for a faster quote.</p>
+    <p class="modal-note">Usually 2–4 hours during business hours (Mon–Sat, 7 AM–7 PM).</p>
+    <button class="full-btn" style="margin-top:24px" onclick="document.getElementById('quoteModal').hidden=true">Got It</button>
+  </div>
+</div>
+
+<!-- SCHEDULE SUCCESS MODAL -->
+<div class="modal-bg" id="schedModal" hidden onclick="if(event.target===this)this.hidden=true">
+  <div class="modal-box">
+    <div class="modal-ico">📅</div>
+    <h3>Pickup Confirmed!</h3>
+    <p id="schedConfirmMsg">We'll send a confirmation text with your pickup details.</p>
+    <button class="full-btn" style="margin-top:24px" onclick="document.getElementById('schedModal').hidden=true">Done</button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+// ── CONFIG — replace with your values ──
+const SUPABASE_URL  = 'https://esjfohheypqmilbjajjk.supabase.co';
+const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVzamZvaGhleXBxbWlsYmphamprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk2OTI0NzcsImV4cCI6MjEwNTI2ODQ3N30.XfJoZ5VF0zby56Lyebu3o5vl_-hc7ekdPTLXr8MAozM';
+const PHONE         = '+13205550100'; // ← swap with your real number when you get it
+const PHOTO_BUCKET  = 'quote-photos';
+
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// ── PRICING TOGGLE ──
+function swapPricing(mode, btn) {
+  document.getElementById('pg-items').style.display = mode === 'items' ? 'grid' : 'none';
+  document.getElementById('pg-sqft').style.display  = mode === 'sqft'  ? 'grid' : 'none';
+  btn.closest('.ptabs').querySelectorAll('.ptab').forEach(t => t.classList.remove('on'));
+  btn.classList.add('on');
+}
+function pickCard(el) {
+  el.closest('.pgrid').querySelectorAll('.pcard').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+}
+
+// ── PHOTO UPLOAD ──
+function handlePhoto(inp) {
+  const file = inp.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('previewImg').src = e.target.result;
+    document.getElementById('previewWrap').style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+  document.getElementById('uploadBox').style.borderColor = 'var(--green)';
+}
+
+// ── QUOTE METHOD ──
+function pickMethod(el) {
+  el.closest('.qmethods').querySelectorAll('.qmethod').forEach(m => m.classList.remove('on'));
+  el.classList.add('on');
+}
+
+// ── SEND QUOTE ──
+async function sendQuote() {
+  const phone = document.getElementById('qPhone').value.trim();
+  if (!phone) { document.getElementById('qPhone').focus(); return; }
+
+  const btn = document.querySelector('[onclick="sendQuote()"]');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  const name     = (document.getElementById('qFirst').value + ' ' + document.getElementById('qLast').value).trim();
+  const addr     = document.getElementById('qAddr').value.trim();
+  const load     = document.getElementById('qLoad').value;
+  const notes    = document.getElementById('qNotes').value.trim();
+  const method   = document.querySelector('.qmethod.on')?.dataset.method || 'text';
+  const photoInp = document.getElementById('photoInput');
+
+  // Upload photo to Supabase Storage if one was selected
+  let photo_url = null;
+  if (photoInp.files[0]) {
+    const file = photoInp.files[0];
+    const ext  = file.name.split('.').pop();
+    const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+    const { data: upload, error: upErr } = await sb.storage
+      .from(PHOTO_BUCKET)
+      .upload(path, file, { contentType: file.type });
+    if (!upErr) {
+      const { data: pub } = sb.storage.from(PHOTO_BUCKET).getPublicUrl(path);
+      photo_url = pub.publicUrl;
+    }
+  }
+
+  // Save quote request to Supabase
+  const { error } = await sb.from('quote_requests').insert({
+    name, phone, address: addr, load_size: load,
+    notes, photo_url, quote_method: method
+  });
+
+  btn.innerHTML = `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Send Quote Request`;
+  btn.disabled = false;
+
+  if (error) {
+    console.error('Supabase error:', error);
+    // Fall back to SMS if Supabase fails
+    const smsBody = `Quote request from ${name || 'customer'}. Phone: ${phone}. Address: ${addr || 'TBD'}. Load: ${load || 'TBD'}. Notes: ${notes || 'none'}.`;
+    window.open('sms:' + PHONE + '?body=' + encodeURIComponent(smsBody));
+  }
+
+  // Also fire SMS deep link so you get an instant notification
+  const smsBody = `📸 New quote request! ${name || 'Customer'} · ${phone} · ${load || 'load TBD'} · ${addr || 'address TBD'}${photo_url ? ' · Photo: ' + photo_url : ''}`;
+  window.open('sms:' + PHONE + '?body=' + encodeURIComponent(smsBody));
+
+  document.getElementById('modalPhoneDisplay').textContent = phone;
+  document.getElementById('quoteModal').hidden = false;
+}
+
+// ── CALENDAR ──
+const now0 = new Date(); now0.setHours(0,0,0,0);
+let cal = { y: now0.getFullYear(), m: now0.getMonth() };
+let picked = null;
+let pickedSlot = null;
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const MSHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const DAYS   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+function buildCal() {
+  const now = new Date(); now.setHours(0,0,0,0);
+  const first = new Date(cal.y, cal.m, 1).getDay();
+  const last  = new Date(cal.y, cal.m + 1, 0).getDate();
+  document.getElementById('calMonthLabel').textContent = MONTHS[cal.m] + ' ' + cal.y;
+  let html = '';
+  for (let i = 0; i < first; i++) html += '<button class="dcell" disabled></button>';
+  for (let d = 1; d <= last; d++) {
+    const dt = new Date(cal.y, cal.m, d);
+    const past    = dt < now;
+    const sun     = dt.getDay() === 0;
+    const isToday = dt.toDateString() === now.toDateString();
+    const isPicked= picked && picked.toDateString() === dt.toDateString();
+    let cls = 'dcell';
+    if (isToday)  cls += ' today';
+    if (isPicked) cls += ' picked';
+    const dis = (past || sun) ? 'disabled' : '';
+    html += `<button class="${cls}" ${dis} onclick="pickDay(${cal.y},${cal.m},${d})">${d}</button>`;
+  }
+  document.getElementById('calCells').innerHTML = html;
+}
+function pickDay(y,m,d) {
+  picked = new Date(y,m,d);
+  document.getElementById('slotDateLabel').textContent =
+    DAYS[picked.getDay()] + ', ' + MSHORT[m] + ' ' + d;
+  pickedSlot = null;
+  document.querySelectorAll('.slot').forEach(s => s.classList.remove('picked'));
+  buildCal();
+}
+function navMonth(dir) {
+  cal.m += dir;
+  if (cal.m < 0)  { cal.m = 11; cal.y--; }
+  if (cal.m > 11) { cal.m = 0;  cal.y++; }
+  buildCal();
+}
+function pickSlot(el) {
+  document.querySelectorAll('.slot').forEach(s => s.classList.remove('picked'));
+  el.classList.add('picked');
+  pickedSlot = el.textContent.trim();
+}
+
+// ── CONFIRM PICKUP ──
+async function confirmPickup() {
+  if (!picked || !pickedSlot) { alert('Please select a date and time window first.'); return; }
+  const name  = document.getElementById('sName').value.trim();
+  const phone = document.getElementById('sPhone').value.trim();
+  if (!phone) { document.getElementById('sPhone').focus(); return; }
+
+  const btn = document.querySelector('[onclick="confirmPickup()"]');
+  btn.textContent = 'Confirming…';
+  btn.disabled = true;
+
+  const isoDate = picked.toISOString().split('T')[0]; // YYYY-MM-DD
+
+  const { error } = await sb.from('pickup_schedules').insert({
+    name, phone, pickup_date: isoDate, time_slot: pickedSlot
+  });
+
+  btn.textContent = 'Confirm Pickup';
+  btn.disabled = false;
+
+  const dateStr = MSHORT[picked.getMonth()] + ' ' + picked.getDate() + ', ' + picked.getFullYear();
+
+  if (error) console.error('Supabase error:', error);
+
+  // SMS notification to your number
+  const smsBody = `📅 New pickup request! ${name || 'Customer'} · ${phone} · ${dateStr} · ${pickedSlot}`;
+  window.open('sms:' + PHONE + '?body=' + encodeURIComponent(smsBody));
+
+  document.getElementById('schedConfirmMsg').textContent =
+    `We'll see you ${dateStr}, ${pickedSlot}. A confirmation text is on its way to ${phone}.`;
+  document.getElementById('schedModal').hidden = false;
+}
+
+buildCal();
+</script>
